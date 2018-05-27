@@ -1,10 +1,13 @@
 package com.mojita.integration.core.datasource;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import org.apache.ibatis.javassist.scopedpool.SoftValueHashMap;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -45,13 +48,20 @@ public class MybatisConfiguration extends MybatisAutoConfiguration {
 
 
     @Bean(name = "sqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory() {
-//        return super.sqlSessionFactory();
-        return null;
+    public SqlSessionFactory sqlSessionFactory() throws Exception {
+        return super.sqlSessionFactory(routingDataSourceProxy());
     }
 
-//    public AbstractRoutingDataSource routingDataSourceProxy() {
-//        re
-//    }
+    public AbstractRoutingDataSource routingDataSourceProxy() {
+        MoreRoutingDataSource proxy = new MoreRoutingDataSource();
+        ConcurrentHashMap targetDataResources = new ConcurrentHashMap();
+        targetDataResources.put(DataBaseContextHolder.DataBaseType.POSTGRES,postgresDataSource);
+        targetDataResources.put(DataBaseContextHolder.DataBaseType.MYSQLMASTER,mysqlMasterDataSource);
+        targetDataResources.put(DataBaseContextHolder.DataBaseType.MYSQLSLAVEONE,mysqlSlaveOneDataSource);
+        //设置默认数据源
+        proxy.setDefaultTargetDataSource(mysqlMasterDataSource);
+        proxy.setTargetDataSources(targetDataResources);
+        return proxy;
+    }
 
 }

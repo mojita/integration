@@ -15,7 +15,7 @@ spring:
 #多数据源相关配置
 druid:
   type: com.alibaba.druid.pool.DruidDataSource
-  mysqlMaster:
+  mysqlmaster:
     url: jdbc:mysql://192.168.56.20:3306/mail?characterEncoding=UTF-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true
     dirver-class-name: com.mysql.jdbc.Driver
     username: root
@@ -32,9 +32,9 @@ druid:
     testOnReturn: false
     poolPreparedStatements: true
     maxPoolPreparedStatementPerConnectionSize: 20
-    filters: stat,wall,log4j
+#    filters: stat,wall,log4j
     useGlobalDataSourceStat: true
-  mysqlSlaveOne:
+  mysqlslaveone:
     url: jdbc:mysql://192.168.56.21:3306/mail?characterEncoding=UTF-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&useUnicode=true
     dirver-class-name: com.mysql.jdbc.Driver
     username: root
@@ -51,7 +51,7 @@ druid:
     testOnReturn: false
     poolPreparedStatements: true
     maxPoolPreparedStatementPerConnectionSize: 20
-    filters: stat,wall,log4j
+#    filters: stat,wall,log4j
     useGlobalDataSourceStat: true
   postgres:
     dirver-class-name: org.postgresql.Driver

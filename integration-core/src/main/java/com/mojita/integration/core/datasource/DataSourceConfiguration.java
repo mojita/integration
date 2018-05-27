@@ -25,8 +25,8 @@ public class DataSourceConfiguration {
     @Value("${druid.type}")
     private Class<? extends DataSource> dataSourceType;
 
-    @Bean(name = "postgresDataSource")
     @Primary
+    @Bean(name = "postgresDataSource")
     @ConfigurationProperties(prefix = "druid.postgres")
     public DataSource postgresDataSource() {
         DataSource postgresDataSource = DataSourceBuilder.create().type(dataSourceType).build();
@@ -37,7 +37,8 @@ public class DataSourceConfiguration {
 
 
     @Bean(name = "mysqlMasterDataSource")
-    @ConfigurationProperties(prefix = "druid.mysqlMaster")
+//    @Primary
+    @ConfigurationProperties(prefix = "druid.mysqlmaster")
     public DataSource mysqlMasterDataSource() {
         DataSource mysqlMasterDataSource = DataSourceBuilder.create().type(dataSourceType).build();
         System.out.println("=============mysqlMaster" + mysqlMasterDataSource);
@@ -46,7 +47,7 @@ public class DataSourceConfiguration {
 
 
     @Bean(name = "mysqlSlaveOneDataSource")
-    @ConfigurationProperties(prefix = "druid.mysqlSlaveOne")
+    @ConfigurationProperties(prefix = "druid.mysqlslaveone")
     public DataSource mysqlSlaveDataSource() {
         DataSource mysqlSlaveDataSource = DataSourceBuilder.create().type(dataSourceType).build();
         System.out.println("=============msyqlSlave" + mysqlSlaveDataSource);

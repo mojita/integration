@@ -1,9 +1,17 @@
 package com.mojita.integration.core;
 
+import java.sql.Connection;
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.mojita.integration.core.entity.Student;
+import com.mojita.integration.core.service.StudentServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -12,5 +20,68 @@ public class CoreApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
+
+	@Autowired
+	private StudentServiceImpl studentService;
+
+	@Test
+	public void testStudent() {
+		Student student = new Student();
+		student.setId(1);
+		student.setPassword("123");
+		student.setUsername("张三");
+//		studentService.addStudent(student);
+	}
+
+	@Test
+	public void testAddStudentMysql() {
+		Student student = new Student();
+		student.setId(1);
+		student.setPassword("123");
+		student.setUsername("张三");
+		studentService.addStudentMysql(student);
+	}
+
+	@Test
+	public void testStudentMysql() {
+//		Student student = new Student();
+//		student.setId(1);
+//		student.setPassword("123");
+//		student.setUsername("张三");
+		Student student = studentService.selectStudentMysql(1);
+		System.out.println("mysqlSlave:" + student.toString());
+	}
+
+	@Test
+	public void testSelectStudentPostgres() {
+//		Student student = new Student();
+//		student.setId(1);
+//		student.setPassword("123");
+//		student.setUsername("张三");
+		Student student = studentService.selectStudentPostgres(1);
+		System.out.println("postgres:" + student.toString());
+	}
+
+
+
+	@Resource(name = "postgresDataSource")
+	private DataSource postgresDataSource;
+	@Resource(name = "mysqlMasterDataSource")
+	private DataSource mysqlMasterDataSource;
+	@Resource(name = "mysqlSlaveOneDataSource")
+	private DataSource mysqlSlaveOneDataSource;
+
+	@Test
+	public void testConnection() throws Exception{
+		Connection c1 = postgresDataSource.getConnection("postgres","postgres");
+		System.out.println("c1" + c1.getMetaData().getURL());
+		Connection c2 = mysqlMasterDataSource.getConnection("root","19950404ljh");
+		System.out.println("c2" + c2.getMetaData().getURL());
+		Connection c3 = mysqlSlaveOneDataSource.getConnection("root","19950404ljh");
+		System.out.println("c3" + c3.getMetaData().getURL());
+
+	}
+
+
 
 }
