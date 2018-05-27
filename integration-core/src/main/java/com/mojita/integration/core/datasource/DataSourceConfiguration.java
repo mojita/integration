@@ -22,10 +22,10 @@ import com.alibaba.druid.support.http.WebStatFilter;
 @EnableTransactionManagement
 public class DataSourceConfiguration {
 
-    @Value("")
+    @Value("${druid.type}")
     private Class<? extends DataSource> dataSourceType;
 
-    @Bean
+    @Bean(name = "postgresDataSource")
     @Primary
     @ConfigurationProperties(prefix = "druid.postgres")
     public DataSource postgresDataSource() {
@@ -36,7 +36,7 @@ public class DataSourceConfiguration {
 
 
 
-    @Bean
+    @Bean(name = "mysqlMasterDataSource")
     @ConfigurationProperties(prefix = "druid.mysqlMaster")
     public DataSource mysqlMasterDataSource() {
         DataSource mysqlMasterDataSource = DataSourceBuilder.create().type(dataSourceType).build();
@@ -45,7 +45,7 @@ public class DataSourceConfiguration {
     }
 
 
-    @Bean
+    @Bean(name = "mysqlSlaveOneDataSource")
     @ConfigurationProperties(prefix = "druid.mysqlSlaveOne")
     public DataSource mysqlSlaveDataSource() {
         DataSource mysqlSlaveDataSource = DataSourceBuilder.create().type(dataSourceType).build();
