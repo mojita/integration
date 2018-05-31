@@ -1,16 +1,14 @@
 package com.mojita.integration.core.datasource;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-
+import java.util.Map;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import org.apache.ibatis.javassist.scopedpool.SoftValueHashMap;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.aspectj.apache.bcel.util.ClassLoaderRepository;
 import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
@@ -47,20 +45,29 @@ public class MybatisConfiguration extends MybatisAutoConfiguration {
 
 
 
+//    @Bean(name = "sqlSessionFactory")
+//    public SqlSessionFactory sqlSessionFactory() throws Exception {
+//        return super.sqlSessionFactory(routingDataSourceProxy());
+//    }
+
     @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         return super.sqlSessionFactory(routingDataSourceProxy());
     }
 
+
+
+
     public AbstractRoutingDataSource routingDataSourceProxy() {
         MoreRoutingDataSource proxy = new MoreRoutingDataSource();
-        ConcurrentHashMap targetDataResources = new ConcurrentHashMap();
+        Map<Object,Object> targetDataResources =new ClassLoaderRepository.SoftHashMap();
         targetDataResources.put(DataBaseContextHolder.DataBaseType.POSTGRES,postgresDataSource);
         targetDataResources.put(DataBaseContextHolder.DataBaseType.MYSQLMASTER,mysqlMasterDataSource);
         targetDataResources.put(DataBaseContextHolder.DataBaseType.MYSQLSLAVEONE,mysqlSlaveOneDataSource);
         //设置默认数据源
         proxy.setDefaultTargetDataSource(mysqlMasterDataSource);
         proxy.setTargetDataSources(targetDataResources);
+        proxy.afterPropertiesSet();
         return proxy;
     }
 

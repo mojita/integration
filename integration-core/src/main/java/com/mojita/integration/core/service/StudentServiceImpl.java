@@ -1,5 +1,7 @@
 package com.mojita.integration.core.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +45,15 @@ public class StudentServiceImpl {
         return studentDao.selectStudent(id);
     }
 
+    @PostgresConnection
+    public List<Student> selectStudentAll() {
+        return studentDao.select();
+    }
 
+//    @PostgresConnection
+//    public List<Student> students(Student student) {
+//        return studentDao.select(student);
+//    }
 
 
 }

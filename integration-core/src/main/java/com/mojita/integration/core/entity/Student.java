@@ -1,5 +1,6 @@
 package com.mojita.integration.core.entity;
 
+
 /**
  * @author lijunhong
  * @since 18/5/28 上午3:23
@@ -10,7 +11,27 @@ public class Student {
     private Integer id;
     private String username;
     private String password;
+//    private Package aPackage;
+//    private StudentClass studentClass;
 
+
+    public Student() {}
+
+//    public StudentClass getStudentClass() {
+//        return studentClass;
+//    }
+//
+//    public void setStudentClass(StudentClass studentClass) {
+//        this.studentClass = studentClass;
+//    }
+//
+//    public Package getaPackage() {
+//        return aPackage;
+//    }
+//
+//    public void setaPackage(Package aPackage) {
+//        this.aPackage = aPackage;
+//    }
 
     public Integer getId() {
         return id;

@@ -79,9 +79,25 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid-spring-boot-starter</artifactId>
 		</dependency>
+		<!--PageHelper-->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+		</dependency>
 		<!--<dependency>-->
 			<!--<groupId></groupId>-->
 			<!--<artifactId></artifactId>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>tk.mybatis</groupId>-->
+			<!--<artifactId>mapper</artifactId>-->
+			<!--<version>3.4.2</version>-->
+		<!--</dependency>-->
+		<!--mapper-->
+		<!--<dependency>-->
+			<!--<groupId>tk.mybatis</groupId>-->
+			<!--<artifactId>mapper-spring-boot-starter</artifactId>-->
+			<!--<version>2.0.2</version>-->
 		<!--</dependency>-->
 	</dependencies>
 

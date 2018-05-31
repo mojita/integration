@@ -28,6 +28,7 @@ public class DataBaseContextHolder {
      * @return
      */
     public static DataBaseType getDatabaseType() {
+        System.out.println("contextHolder.get:" + contextHolder.get());
         return contextHolder.get()  == null ? DataBaseType.POSTGRES : contextHolder.get();
     }
 

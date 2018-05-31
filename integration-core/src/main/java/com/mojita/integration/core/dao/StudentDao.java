@@ -1,6 +1,9 @@
 package com.mojita.integration.core.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -15,8 +18,9 @@ import com.mojita.integration.core.entity.Student;
 public interface StudentDao {
 
     @Insert(
-            "INSERT INTO student(id,username,password) VALUES(#{student.id},#{student.username},#{student.password})"
+            "INSERT INTO student(username,password) VALUES(#{student.username},#{student.password})"
     )
+    @Options(useGeneratedKeys = true,keyColumn = "id")
     int insertStudent(@Param("student")Student student);
 
 
@@ -24,5 +28,14 @@ public interface StudentDao {
             "SELECT * FROM student WHERE id=#{id}"
     })
     Student selectStudent(@Param("id")Integer id);
+
+    @Select({
+            "SELECT * FROM student"
+    })
+    List<Student> selectStudentAll();
+
+    int addStudent(@Param("student")Student student);
+
+    List<Student> select();
 
 }
