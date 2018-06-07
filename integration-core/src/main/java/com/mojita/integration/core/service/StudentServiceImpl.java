@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mojita.integration.core.dao.StudentDao;
 import com.mojita.integration.core.datasource.annotations.PostgresConnection;
 import com.mojita.integration.core.datasource.annotations.ReadOnlyConnection;
-import com.mojita.integration.core.datasource.annotations.ReadOrWriteConnection;
 import com.mojita.integration.core.entity.Student;
 
 /**
@@ -29,13 +30,14 @@ public class StudentServiceImpl {
 //        return count;
 //    }
 
-    @ReadOrWriteConnection
+//    @ReadOrWriteConnection
     public int addStudentMysql(Student student) {
         int count = studentDao.insertStudent(student);
         return count;
     }
 
     @ReadOnlyConnection
+    @Transactional(propagation = Propagation.SUPPORTS)
     public Student selectStudentMysql(Integer id) {
         return studentDao.selectStudent(id);
     }
@@ -45,7 +47,8 @@ public class StudentServiceImpl {
         return studentDao.selectStudent(id);
     }
 
-    @PostgresConnection
+    @Transactional
+//    @PostgresConnection
     public List<Student> selectStudentAll() {
         return studentDao.select();
     }

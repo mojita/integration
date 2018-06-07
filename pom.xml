@@ -204,17 +204,17 @@
 				<!--<version>${PageHelper.version}</version>-->
 			<!--</dependency>-->
 			<!--pagehelper-->
-			<dependency>
-				<groupId>com.github.pagehelper</groupId>
-				<artifactId>pagehelper-spring-boot-starter</artifactId>
-				<version>${PageHelper.version}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>mybatis-spring-boot-starter</artifactId>
-						<groupId>org.mybatis.spring.boot</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>
+			<!--<dependency>-->
+				<!--<groupId>com.github.pagehelper</groupId>-->
+				<!--<artifactId>pagehelper-spring-boot-starter</artifactId>-->
+				<!--<version>${PageHelper.version}</version>-->
+				<!--<exclusions>-->
+					<!--<exclusion>-->
+						<!--<artifactId>mybatis-spring-boot-starter</artifactId>-->
+						<!--<groupId>org.mybatis.spring.boot</groupId>-->
+					<!--</exclusion>-->
+				<!--</exclusions>-->
+			<!--</dependency>-->
 			<!--druid-->
 			<dependency>
 				<groupId>com.alibaba</groupId>

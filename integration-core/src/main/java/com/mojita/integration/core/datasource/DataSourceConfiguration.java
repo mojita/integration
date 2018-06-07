@@ -37,7 +37,6 @@ public class DataSourceConfiguration {
 
 
     @Bean(name = "mysqlMasterDataSource")
-//    @Primary
     @ConfigurationProperties(prefix = "druid.mysqlmaster")
     public DataSource mysqlMasterDataSource() {
         DataSource mysqlMasterDataSource = DataSourceBuilder.create().type(dataSourceType).build();

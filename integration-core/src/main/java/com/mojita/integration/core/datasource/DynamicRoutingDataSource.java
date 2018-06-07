@@ -6,7 +6,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
  * @author lijunhong
  * @since 18/5/28 上午1:16
  */
-public class MoreRoutingDataSource extends AbstractRoutingDataSource{
+public class DynamicRoutingDataSource extends AbstractRoutingDataSource{
 
 
     @Override
