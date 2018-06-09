@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mojita.integration.core.dao.ClassEntityDao">
+
+    <resultMap id="myCLassEntity" type="com.mojita.integration.core.entity.ClassEntity">
+        <id column="id" property="id"/>
+        <result column="class_name" property="className"/>
+    </resultMap>
+
+
+    <select id="getClassEntityLikeByName" resultType="com.mojita.integration.core.entity.ClassEntity">
+        SELECT * FROM class_entity WHERE class_name LIKE #{name}
+    </select>
+
+    <select id="selectCLassEntityMap" resultType="java.util.Map">
+        SELECT * FROM class_entity WHERE id=#{id}
+    </select>
+
+    <select id="selectCLassEntityMaps" resultType="com.mojita.integration.core.entity.ClassEntity">
+        SELECT * FROM Class_entity
+    </select>
+
+
+    <select id="selectClassEntityById" resultType="com.mojita.integration.core.entity.ClassEntity">
+        SELECT * FROM class_entity WHERE id=#{id}
+    </select>
+
+
+
+
+
+    <!--1、进行实现一对多实现(级联查询) 这里是通过：collection嵌套结果集的方式进行查询的-->
+    <resultMap id="resultMap1" type="com.mojita.integration.core.entity.ClassEntity">
+        <id column="id" property="id"/>
+        <result column="class_name" property="className"/>
+        <collection property="student" ofType="com.mojita.integration.core.entity.Student">
+            <id column="student_id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+        </collection>
+    </resultMap>
+
+
+
+    <select id="selectClassEntityByIdXml" resultMap="resultMap1">
+        SELECT ce.*,s.*,s.id AS student_id FROM class_entity ce LEFT JOIN student s ON ce.id=s.class_id WHERE ce.id=#{id}
+    </select>
+
+    <!--2、通过分布查询规则进行查询-->
+
+    <resultMap id="resultMap2" type="com.mojita.integration.core.entity.ClassEntity">
+        <id column="id" property="id"/>
+        <result column="class_name" property="className"/>
+        <!--将多列的值传递给分步查询参数：column="{key=value,key2=value2}"-->
+        <collection property="student" select="com.mojita.integration.core.dao.StudentDao.selectStudentByClassId" column="id">
+        </collection>
+    </resultMap>
+
+
+    <select id="selectClassEntityByIdSimpleXml" resultMap="resultMap2">
+        SELECT * FROM class_entity WHERE id=#{id}
+    </select>
+
+
+
+
+
+</mapper>

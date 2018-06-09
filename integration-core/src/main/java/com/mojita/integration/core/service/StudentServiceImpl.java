@@ -62,5 +62,20 @@ public class StudentServiceImpl {
         return studentDao.selectOne(student);
     }
 
+    @DataSourceConnection(DataBaseContextHolder.DataBaseType.MYSQLSLAVEONE)
+    public Student getStudentAndClassById(Integer id) {
+        return studentDao.selectStudentAndClass(id);
+    }
+
+    @DataSourceConnection(DataBaseContextHolder.DataBaseType.MYSQLSLAVEONE)
+    public Student getStudentAndClassByIdAccios(Integer id) {
+        return studentDao.selectStudentAndClassByAssoci(id);
+    }
+
+    @DataSourceConnection(DataBaseContextHolder.DataBaseType.MYSQLSLAVEONE)
+    public Student getSutdentAndClassByIdAnnot(Integer id) {
+        return studentDao.selectStudentAndClassByIdOnAnnot(id);
+    }
+
 
 }

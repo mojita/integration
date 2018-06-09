@@ -1,6 +1,7 @@
 package com.mojita.integration.core.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -33,5 +34,29 @@ public interface StudentDao extends BaseMapper<Student> {
     List<Student> selectStudentAll();
 
     int addStudent(@Param("student")Student student);
+
+
+
+    Student selectStudentAndClass(@Param("id")Integer id);
+
+    Student selectStudentAndClassByAssoci(@Param("id")Integer id);
+
+    //这里通过注解实现一对一查询
+    @Select({
+            "SELECT * FROM student WHERE id=#{id}"
+    })
+    @Results({
+            @Result(column = "class_id",
+                    property = "classEntity",
+                    one = @One(select = "com.mojita.integration.core.dao.ClassEntityDao.selectClassEntityById")
+            )
+    })
+    Student selectStudentAndClassByIdOnAnnot(@Param("id")Integer id);
+
+    @Select({
+            "SELECT * FROM student WHERE class_id=#{classId}"
+    })
+    List<Student> selectStudentByClassId(Map<String,Object> param);
+//    List<Student> selectStudentByClassId(@Param("classId")Integer classId);
 
 }

@@ -66,6 +66,13 @@ pagehelper:
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.mojita.integration.core.entity
+  configuration:
+    map-underscore-to-camel-case: true
+#    lazy-loading-enabled: true
+#    aggressive-lazy-loading: true
 mapper:
   mappers: com.mojita.integration.core.common.basedao.BaseMapper
   not-empty: false
+logging:
+  level:
+    com.mojita.integration.core.dao: debug

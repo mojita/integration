@@ -6,6 +6,54 @@
     </insert>
 
 
+
+
+    <!--这里使用的是级联属性进行查询（注解我觉得也是可以的）-->
+    <resultMap id="myStudentAndClass_1" type="com.mojita.integration.core.entity.Student">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="class_id" property="classEntity.id"/>
+        <result column="class_name" property="classEntity.className"/>
+    </resultMap>
+
+    <!--第二种方式：这里是用的是嵌套查询-->
+    <resultMap id="myStudentAndClass_2" type="com.mojita.integration.core.entity.Student">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <association property="classEntity" javaType="com.mojita.integration.core.entity.ClassEntity">
+            <id column="class_id" property="id"/>
+            <result column="class_name" property="className"/>
+        </association>
+    </resultMap>
+
+
+    <select id="selectStudentAndClass" resultMap="myStudentAndClass_2">
+        SELECT s.*,ce.id AS c_id,ce.class_name AS class_name
+        FROM student s LEFT JOIN class_entity ce  ON ce.id=s.class_id WHERE s.id=#{id}
+    </select>
+
+
+    <!--通过association 进行分步查询 这种查询方式支持延迟加载-->
+    <resultMap id="myStudentAndClass_3" type="com.mojita.integration.core.entity.Student">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <!--定义关联对象 column中的值将作为下一个查询的值-->
+        <association property="classEntity" select="com.mojita.integration.core.dao.ClassEntityDao.selectClassEntityById" column="class_id">
+        </association>
+    </resultMap>
+    <select id="selectStudentAndClassByAssoci" resultMap="myStudentAndClass_3">
+        SELECT * FROM student WHERE id=#{id}
+    </select>
+
+
+
+
+
+
+
     <!--<select id="select" resultType="com.mojita.integration.core.entity.Student">-->
         <!--select * from student;-->
     <!--</select>-->

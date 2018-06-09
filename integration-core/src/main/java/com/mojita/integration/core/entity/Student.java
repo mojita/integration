@@ -11,27 +11,10 @@ public class Student {
     private Integer id;
     private String username;
     private String password;
-//    private Package aPackage;
-//    private StudentClass studentClass;
-
+    private ClassEntity classEntity;
 
     public Student() {}
 
-//    public StudentClass getStudentClass() {
-//        return studentClass;
-//    }
-//
-//    public void setStudentClass(StudentClass studentClass) {
-//        this.studentClass = studentClass;
-//    }
-//
-//    public Package getaPackage() {
-//        return aPackage;
-//    }
-//
-//    public void setaPackage(Package aPackage) {
-//        this.aPackage = aPackage;
-//    }
 
     public Integer getId() {
         return id;
@@ -57,12 +40,21 @@ public class Student {
         this.password = password;
     }
 
+    public ClassEntity getClassEntity() {
+        return classEntity;
+    }
+
+    public void setClassEntity(ClassEntity classEntity) {
+        this.classEntity = classEntity;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", classEntity=" + classEntity +
                 '}';
     }
 }
