@@ -2,12 +2,10 @@ package com.mojita.integration.core.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
+import com.mojita.integration.core.common.basedao.BaseMapper;
 import com.mojita.integration.core.entity.Student;
 
 /**
@@ -15,7 +13,7 @@ import com.mojita.integration.core.entity.Student;
  * @since 18/5/28 上午3:27
  */
 @Repository
-public interface StudentDao {
+public interface StudentDao extends BaseMapper<Student> {
 
     @Insert(
             "INSERT INTO student(username,password) VALUES(#{student.username},#{student.password})"
@@ -35,7 +33,5 @@ public interface StudentDao {
     List<Student> selectStudentAll();
 
     int addStudent(@Param("student")Student student);
-
-    List<Student> select();
 
 }

@@ -6,7 +6,7 @@
     </insert>
 
 
-    <select id="select" resultType="com.mojita.integration.core.entity.Student">
-        select * from student;
-    </select>
+    <!--<select id="select" resultType="com.mojita.integration.core.entity.Student">-->
+        <!--select * from student;-->
+    <!--</select>-->
 </mapper>

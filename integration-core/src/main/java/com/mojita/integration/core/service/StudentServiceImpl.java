@@ -7,9 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mojita.integration.core.dao.StudentDao;
-import com.mojita.integration.core.datasource.annotations.PostgresConnection;
-import com.mojita.integration.core.datasource.annotations.ReadOnlyConnection;
+import com.mojita.integration.core.config.datasource.DataBaseContextHolder;
+import com.mojita.integration.core.config.datasource.annotations.DataSourceConnection;
 import com.mojita.integration.core.entity.Student;
 
 /**
@@ -36,27 +39,28 @@ public class StudentServiceImpl {
         return count;
     }
 
-    @ReadOnlyConnection
+    @DataSourceConnection(value = DataBaseContextHolder.DataBaseType.POSTGRES)
     @Transactional(propagation = Propagation.SUPPORTS)
     public Student selectStudentMysql(Integer id) {
         return studentDao.selectStudent(id);
     }
 
-    @PostgresConnection
+    @DataSourceConnection(value = DataBaseContextHolder.DataBaseType.MYSQLMASTER)
     public Student selectStudentPostgres(Integer id) {
         return studentDao.selectStudent(id);
     }
 
-    @Transactional
-//    @PostgresConnection
+    @DataSourceConnection(value = DataBaseContextHolder.DataBaseType.POSTGRES)
     public List<Student> selectStudentAll() {
-        return studentDao.select();
+        Page<Student> pageInfo = PageHelper.startPage(1,1);
+        studentDao.selectStudentAll();
+        PageInfo<Student> info = new PageInfo<>(pageInfo);
+        return info.getList();
     }
 
-//    @PostgresConnection
-//    public List<Student> students(Student student) {
-//        return studentDao.select(student);
-//    }
+    public Student studentOne(Student student) {
+        return studentDao.selectOne(student);
+    }
 
 
 }

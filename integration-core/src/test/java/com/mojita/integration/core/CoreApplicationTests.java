@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
@@ -62,9 +63,20 @@ public class CoreApplicationTests {
 //		student.setId(1);
 //		student.setPassword("123");
 //		student.setUsername("张三");
-		Student student = studentService.selectStudentPostgres(1);
+		List<Student> student = studentService.selectStudentAll();
 		System.out.println("postgres:" + student.toString());
 	}
+
+
+	//测试baseMapper
+	@Test
+	public void testSelectStudentOne() {
+		Student student = new Student();
+		student.setId(1);
+		Student student1 = studentService.studentOne(student);
+		System.out.println(student1.toString());
+	}
+
 
 //	@Test
 //	public void selectStudentTest() {

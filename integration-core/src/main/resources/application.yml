@@ -66,8 +66,6 @@ pagehelper:
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.mojita.integration.core.entity
-#mapper:
-#  mappers:
-#    - com.mojita.integration.core.dao.BaseMapper
-#  not-empty: false
-#PageHelper
+mapper:
+  mappers: com.mojita.integration.core.common.basedao.BaseMapper
+  not-empty: false

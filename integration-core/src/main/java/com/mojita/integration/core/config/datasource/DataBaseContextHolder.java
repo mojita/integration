@@ -1,4 +1,4 @@
-package com.mojita.integration.core.datasource;
+package com.mojita.integration.core.config.datasource;
 
 /**
  * @author lijunhong

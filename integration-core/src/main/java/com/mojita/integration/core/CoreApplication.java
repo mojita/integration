@@ -1,17 +1,17 @@
 package com.mojita.integration.core;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
-//(exclude = {DataSourceAutoConfiguration.class})(exclude = {DataSourceAutoConfiguration.class})
 @SpringBootApplication
 @EnableAutoConfiguration
-@MapperScan(basePackages = {"com.mojita.integration.core.dao"})
+@EnableTransactionManagement
 //@MapperScan(basePackages = {"com.mojita.integration.core.dao"})
+@tk.mybatis.spring.annotation.MapperScan(basePackages = {"com.mojita.integration.core.dao"})
 @ComponentScan(basePackages = {"com.mojita.integration.core"})
 public class CoreApplication {
 

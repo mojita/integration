@@ -65,7 +65,7 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>compile</scope>
 		</dependency>
-		<!--mybatis-->
+		<!--mybatis 这里tx-mybatis已经维护了-->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
@@ -84,21 +84,11 @@
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId></groupId>-->
-			<!--<artifactId></artifactId>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>tk.mybatis</groupId>-->
-			<!--<artifactId>mapper</artifactId>-->
-			<!--<version>3.4.2</version>-->
-		<!--</dependency>-->
-		<!--mapper-->
-		<!--<dependency>-->
-			<!--<groupId>tk.mybatis</groupId>-->
-			<!--<artifactId>mapper-spring-boot-starter</artifactId>-->
-			<!--<version>2.0.2</version>-->
-		<!--</dependency>-->
+		<!--common mapper-->
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper-spring-boot-starter</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
