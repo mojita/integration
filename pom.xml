@@ -48,6 +48,7 @@
 		<mybtis.version>1.3.1</mybtis.version>
 		<PageHelper.version>1.2.3</PageHelper.version>
 		<tx-mybatis.version>2.0.2</tx-mybatis.version>
+		<shiro-spring.version>1.4.0</shiro-spring.version>
 	</properties>
 
 	<dependencyManagement>
@@ -220,6 +221,12 @@
 				<groupId>tk.mybatis</groupId>
 				<artifactId>mapper-spring-boot-starter</artifactId>
 				<version>${tx-mybatis.version}</version>
+			</dependency>
+			<!--shiro-spring-->
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-spring</artifactId>
+				<version>${shiro-spring.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
