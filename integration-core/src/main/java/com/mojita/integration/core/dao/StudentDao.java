@@ -57,6 +57,9 @@ public interface StudentDao extends BaseMapper<Student> {
             "SELECT * FROM student WHERE class_id=#{classId}"
     })
     List<Student> selectStudentByClassId(Map<String,Object> param);
+
+    //下面进行测试多数据库直接查询不同表的测试方法
+    List<Student> selectStudentByDataBase();
 //    List<Student> selectStudentByClassId(@Param("classId")Integer classId);
 
 }

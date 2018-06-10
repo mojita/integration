@@ -109,6 +109,14 @@ public class ClassStudentTest {
     }
 
 
+    //这里进行测试多数据库
+    @Test
+    public void test11() {
+        List<Student> students = studentService.getStudentByDataBase();
+        System.out.println(students);
+    }
+
+
 
 
 

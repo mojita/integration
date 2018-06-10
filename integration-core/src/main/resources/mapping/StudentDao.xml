@@ -49,9 +49,19 @@
     </select>
 
 
-
-
-
+    <!--进行测试不同数据库使用
+        这里有两个参数：
+        1、_parameter
+        2、_databaseId
+    -->
+    <select id="selectStudentByDataBase" resultType="com.mojita.integration.core.entity.Student">
+        <if test="_databaseId=='mysql'">
+            SELECT * FROM student WHERE username='赵六'
+        </if>
+        <if test="_databaseId=='postgres'">
+            SELECT * FROM student
+        </if>
+    </select>
 
 
     <!--<select id="select" resultType="com.mojita.integration.core.entity.Student">-->

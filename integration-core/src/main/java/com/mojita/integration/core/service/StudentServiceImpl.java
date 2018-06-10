@@ -78,4 +78,10 @@ public class StudentServiceImpl {
     }
 
 
+    @DataSourceConnection(DataBaseContextHolder.DataBaseType.MYSQLSLAVEONE)
+    public List<Student> getStudentByDataBase() {
+        return studentDao.selectStudentByDataBase();
+    }
+
+
 }

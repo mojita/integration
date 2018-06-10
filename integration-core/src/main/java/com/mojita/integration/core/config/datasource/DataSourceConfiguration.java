@@ -1,7 +1,10 @@
 package com.mojita.integration.core.config.datasource;
 
+import java.util.Properties;
 import javax.sql.DataSource;
 
+import org.apache.ibatis.mapping.DatabaseIdProvider;
+import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -51,6 +54,24 @@ public class DataSourceConfiguration {
         DataSource mysqlSlaveDataSource = DataSourceBuilder.create().type(dataSourceType).build();
         System.out.println("=============msyqlSlave" + mysqlSlaveDataSource);
         return mysqlSlaveDataSource;
+    }
+
+
+    /**
+     * 注入数据库别名
+     * TODO 这里暂时还不支持，有时间再弄
+     * @return
+     */
+    @Bean
+    public DatabaseIdProvider getDataBaseIdProvider() {
+        DatabaseIdProvider databaseIdProvider = new VendorDatabaseIdProvider();
+        Properties p = new Properties();
+        p.setProperty("Oracle","oracle");
+        p.setProperty("MySql","mysql");
+        p.setProperty("MariaDB","mariadb");
+        p.setProperty("Postgres","postgres");
+        databaseIdProvider.setProperties(p);
+        return databaseIdProvider;
     }
 
 
