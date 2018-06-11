@@ -26,14 +26,8 @@ public class StudentServiceImpl {
     private StudentDao studentDao;
 
 
-    //测试postgres数据源
-//    @PostgresConnection
-//    public int addStudent(Student student) {
-//        int count = studentDao.insertStudent(student);
-//        return count;
-//    }
 
-//    @ReadOrWriteConnection
+
     public int addStudentMysql(Student student) {
         int count = studentDao.insertStudent(student);
         return count;

@@ -49,6 +49,7 @@
 		<PageHelper.version>1.2.3</PageHelper.version>
 		<tx-mybatis.version>2.0.2</tx-mybatis.version>
 		<shiro-spring.version>1.4.0</shiro-spring.version>
+		<java-jwt.version>3.3.0</java-jwt.version>
 	</properties>
 
 	<dependencyManagement>
@@ -227,6 +228,12 @@
 				<groupId>org.apache.shiro</groupId>
 				<artifactId>shiro-spring</artifactId>
 				<version>${shiro-spring.version}</version>
+			</dependency>
+			<!--jwt-->
+			<dependency>
+				<groupId>com.auth0</groupId>
+				<artifactId>java-jwt</artifactId>
+				<version>${java-jwt.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
