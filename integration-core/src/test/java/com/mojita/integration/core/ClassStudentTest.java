@@ -113,7 +113,7 @@ public class ClassStudentTest {
     @Test
     public void test11() {
         List<Student> students = studentService.getStudentByDataBase();
-        System.out.println(students);
+//        System.out.println(students);
     }
 
 

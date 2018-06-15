@@ -6,7 +6,7 @@
 	<groupId>com.mojita.integration</groupId>
 	<artifactId>core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>core</name>
 	<description>Demo project for Spring Boot</description>
@@ -33,6 +33,10 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 			<version>${spring.boot.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 		<!--postgres-->
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -58,12 +62,12 @@
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<!--mybatis 这里tx-mybatis已经维护了-->
 		<dependency>
@@ -98,6 +102,17 @@
 		<dependency>
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
+		</dependency>
+		<!--guava-->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		<!--分词-->
+		<dependency>
+			<groupId>org.apdplat</groupId>
+			<artifactId>word</artifactId>
+			<version>1.2</version>
 		</dependency>
 	</dependencies>
 

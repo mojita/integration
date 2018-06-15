@@ -1,6 +1,9 @@
 package com.mojita.integration.core.entity;
 
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 /**
  * @author lijunhong
  * @since 18/5/28 上午3:23
@@ -8,8 +11,11 @@ package com.mojita.integration.core.entity;
 public class Student {
 
 
+
     private Integer id;
+    @NotNull(message = "参数部门为空")
     private String username;
+    @NotEmpty(message = "密码不能为空")
     private String password;
     private ClassEntity classEntity;
 
